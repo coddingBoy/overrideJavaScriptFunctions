@@ -128,3 +128,17 @@
 			return base;
 		}
 	}
+	if(Object.prototype.clone===undefined){
+		Object.prototype.clone=function(obj){
+			if (typeof(obj)!=='object') {
+				var o=Object.prototype.toString.call(obj)==='[object Array]'?[]:{};
+				for (var key in obj) {
+					if (obj.hasOwnProperty(key)) {
+						o[key]=arguments.callee(obj[key]);
+					}
+				}
+			}else{
+				return obj;
+			}
+		}
+	}
